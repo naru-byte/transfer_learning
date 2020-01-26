@@ -43,7 +43,6 @@ class VGG16:
         print(feature_batch_fc.shape)
         #convert to classifier vector
         prediction_layer = tf.keras.layers.Dense(self.N_CLASSES, activation=tf.nn.softmax)
-        #prediction_batch = prediction_layer(feature_batch_average)
         prediction_batch = prediction_layer(feature_batch_fc)
         print(prediction_batch.shape)
         #stack above layers
