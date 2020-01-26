@@ -20,7 +20,6 @@ n_epoch = 50
 trainable = [True,False][1]
 batch_size, val_batch = 64,32
 
-
 if __name__ == "__main__":
     with tf.device('/device:CPU:0'):
         data = datasets.caltechdata(data_dir=data_dir,
@@ -52,7 +51,7 @@ if __name__ == "__main__":
                                  IMG_Y_SIZE=IMG_Y_SIZE,
                                  N_CLASSES=N_CLASSES)
     model = network(x=image_batch,trainable=trainable)
-    model.compile(optimizer=tf.keras.optimizers.Adam(),#RMSprop(lr=base_learning_rate),
+    model.compile(optimizer=tf.keras.optimizers.Adam(),
                   loss='categorical_crossentropy',
                   metrics=['accuracy'])
     model.summary()
