@@ -2,7 +2,7 @@ import torch
 import torch.nn.functional as F
 from torch.autograd import Variable
 from torchvision import models
-
+#transfer model
 def transfer(block, pretrained):
     num2block = [4,9,16,23,30][block-1]
     base_model = models.vgg16(pretrained=pretrained)
@@ -10,6 +10,7 @@ def transfer(block, pretrained):
     print(base_vgg)
     return base_vgg
 
+#classificatioin model
 def fcnet(n_size, fc_shapes, n_classes):
     layers = []
     in_shape = n_size
@@ -26,10 +27,11 @@ class Network(torch.nn.Module):
 
     def __init__(self, block, input_shape, fc_shapes=[], n_classes=1, pretrained=True):
         super(Network, self).__init__()
+        #vgg model
         self.base_vgg = transfer(block=block, pretrained=pretrained)
-
+        #vgg model output shape
         self.n_size = self._get_conv_output(shape=input_shape)
-
+        #classification model
         self.fc, self.disc = fcnet(n_size=self.n_size, fc_shapes=fc_shapes, n_classes=n_classes)
     
     # generate input sample and forward to get shape
