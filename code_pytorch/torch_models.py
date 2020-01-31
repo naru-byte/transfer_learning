@@ -4,10 +4,11 @@ from torch.autograd import Variable
 from torchvision import models
 #transfer model
 def transfer(block, pretrained):
-    num2block = [4,9,16,23,30][block-1]
+    #load model
     base_model = models.vgg16(pretrained=pretrained)
+    #redefine model 
+    num2block = [4,9,16,23,30][block-1]
     base_vgg = base_model.features[:(num2block+1)]
-    print(base_vgg)
     return base_vgg
 
 #classificatioin model
